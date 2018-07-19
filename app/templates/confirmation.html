@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="content" id="shareContent">
+
+        <h2>Great!</h2>
+
+        <p>We're calling all your Members of Congress on your behalf right now.</p>
+
+        <p style="font-weight: bold;">Can you share this with your friends so they can auto-dial Congress, too?</p>
+
+        <div class="shareButtons">
+            <a href="#" class="button facebook">Share on Facebook</a>
+            <a href="#" class="button twitter">Share on Twitter</a>
+            <a href="#" class="button whatsapp">Share on WhatsApp</a>
+        </div>
+
+        <div class="instashare">
+            <a href="#" class="noDecoration"><img class="instashareImage" src="{{ url_for('static', filename="images/Dialer Promo 1.png") }}" download>
+                <p>Click here to download this image to share on Instagram</p></a>
+        </div>
+
+        <h2>Want to place more calls?</h2>
+
+        <p>Just click the button below and we'll make another round of calls for you. Feel free to click it more than
+            once. In fact, <span style="font-weight:bold;">please</span> click it a few more times.</p>
+
+        <button class="callButton">Auto-Dial Congress</button>
+
+        <h2>Stay tuned.</h2>
+
+        <p> Because unfortunately it takes more than a confession and this website to kick out a President.</p>
+
+    </div>
+{% endblock %}

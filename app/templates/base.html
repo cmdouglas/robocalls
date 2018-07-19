@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <meta name="description" content="">
+    <meta name="author" content="By the People">
+    <meta property="og:title" content="FACEBOOK TITLE"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="URL"/>
+    <meta property="og:image" content="SHARE IMAGE"/>
+    <meta property="og:site_name" content="SITE NAME"/>
+    <meta property="fb:admins" content="612663871"/>
+    <meta property="og:description" content="FB DESCRIPTION"/>
+    <meta property="twitter:title" content="TWITTER CARD TITLE"/>
+    <meta property="twitter:description" content="TWITTER DESC. CAN INCL. IMAGE"/>
+    <meta name="twittertext" content="TWITTER TEXT WITH HASHTAG"/>
+
+    <title>TITLE (again)</title>
+    <link href="{{ url_for('static', filename='css/baseline.css') }}" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename="js/core.js") }}" rel="stylesheet"></script>
+
+</head>
+<body>
+
+<div class="top">
+
+    <div class="content topContent">
+
+        <h1>#HimToo</h1>
+
+        <!-- <h3>Play a recording of Trump's confession of sexual assault for your Members of Congress who refuse to take action to remove him from office, in just 2 steps that will take less than 30 seconds.</h3> -->
+
+        <p>Donald Trump confessed on tape to committing sexual assault. Follow these two easy steps to make your Members
+            of Congress listen to the recording.</p>
+
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li class="message">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div class="steps" id="steps">
+
+    {% block content %}{% endblock %}
+
+    <div class="FAQs">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faqColumn">
+
+            <p class="faqQuestion">Is this real? Will my Member of Congress listen?</p>
+            <p class="faqAnswer">Yes and yes. This is a completely serious service for anyone who wants to contact their
+                elected officials. Their staff will pick up the phone and listen to your message, which will include
+                your name and the fact that you are a constituent.</p>
+
+            <p class="faqQuestion">What am I asking Congress to do?</p>
+            <p class="faqAnswer">Remove Donald Trump from office because of his confession of sexual assault and cover
+                ups for other abusers in his White House. He is not above the law, and should be treated in the same way
+                as other powerful men in Congress and elsewhere when their history of abuse was revealed.</p>
+
+            <p class="faqQuestion">Why shouldn’t I just call Congress myself?</p>
+            <p class="faqAnswer">You can! There is nothing wrong with a regular call, but Trump’s confession of sexual
+                assault speaks for itself, and we thought this was more efficient.</p>
+
+        </div>
+        <div class="faqColumn">
+
+            <p class="faqQuestion">How will they know who's calling?</p>
+            <p class="faqAnswer">By default we include your name, city and zip code at the start of the call. After
+                listening to your message, your rep(s) get the option to replay it or to hear your name and location
+                again.</p>
+
+            <p class="faqQuestion">What if my congressperson doesn't answer the call?</p>
+            <p class="faqAnswer">Our robots will wait an hour and then try a different number. Most reps have a least
+                two (some as many as eight) office phone numbers. Our robots will try to call each.</p>
+
+            <p class="faqQuestion">Does it cost anything?</p>
+            <p class="faqAnswer">This page is free to use, but every call costs the creators of this site a small
+                amount. If you want to pitch in to support more projects like this, <a
+                        href="https://actionnetwork.org/fundraising/support/" target="_blank">click here</a>.</p>
+
+        </div>
+
+        <div class="clear">
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <img class="footerLogo" src="{{ url_for('static', filename='images/logo.svg') }}">
+    </div>
+
+</body>
+</html>

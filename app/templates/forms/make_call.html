@@ -1,0 +1,37 @@
+<form action="/" method="post">
+    {{ form.hidden_tag() }}
+
+    <h2>Step 1</h2>
+
+    <p>Enter your information so we can direct the recording to the correct Members of Congress.</p>
+
+    <div class="formFields">
+        {{ form.given_name(class='input', placeholder='First Name') }}
+        {% for error in form.given_name.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.family_name(class='input', placeholder='Last Name') }}
+        {% for error in form.family_name.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.email(class='input', placeholder='Email') }}
+        {% for error in form.email.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.postal_code(class='input', placeholder="Zip Code") }}
+        {% for error in form.postal_code.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+
+    </div>
+
+    <h2>Step 2</h2>
+
+    <p>Press this button. When you do, a machine will call a Member of Congress and play the recording of Donald
+        Trump confessing to sexual assault.</p>
+
+    <button class="callButton" id="firstCall">Auto-Dial Congress</button>
+</form>
