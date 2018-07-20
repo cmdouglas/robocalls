@@ -1,9 +1,8 @@
-from pyactionnetwork import ActionNetworkApi
+from app.actionnetwork import ActionNetworkApi
 
 
-def persist_user(app, email, given_name='', family_name='', postal_code=''):
-    return
-    api = ActionNetworkApi(app.config.get('ACTION_NETWORK_KEY'))
+def persist_person(app, email, given_name='', family_name='', postal_code=''):
+    api = ActionNetworkApi(app)
 
     if api.get_person(search_string=email):
         return
