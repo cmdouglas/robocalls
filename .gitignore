@@ -106,5 +106,5 @@ venv.bak/
 # ide settings
 .idea/
 
-#production config
-config.prod.py
+# local cache
+cache/

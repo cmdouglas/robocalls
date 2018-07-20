@@ -15,6 +15,6 @@ def get_reps_by_postal_code(postal_code):
         content = json.loads(content)
     except json.decoder.JSONDecodeError:
         content = {'results':[]}
-        
+
     cache.set(postal_code, content['results'])
     return content['results']

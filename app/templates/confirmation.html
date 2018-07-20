@@ -8,6 +8,14 @@
 
         <p>We're calling all your Members of Congress on your behalf right now.</p>
 
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message">{{ message|safe }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
         <p style="font-weight: bold;">Can you share this with your friends so they can auto-dial Congress, too?</p>
 
         <div class="shareButtons">
@@ -21,12 +29,7 @@
                 <p>Click here to download this image to share on Instagram</p></a>
         </div>
 
-        <h2>Want to place more calls?</h2>
-
-        <p>Just click the button below and we'll make another round of calls for you. Feel free to click it more than
-            once. In fact, <span style="font-weight:bold;">please</span> click it a few more times.</p>
-
-        <button class="callButton">Auto-Dial Congress</button>
+        {% include 'forms/make_call_again.html' %}
 
         <h2>Stay tuned.</h2>
 

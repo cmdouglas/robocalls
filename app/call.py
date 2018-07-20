@@ -1,6 +1,7 @@
 import phonenumbers
 import requests
 import json
+from flask import flash
 
 
 def format_phone(phone):
@@ -16,6 +17,7 @@ def make_calls(app, given_name, family_name, postal_code, reps):
 
     for rep in reps:
         make_call(app, given_name, family_name, postal_code, rep)
+        flash(f'Call placed to <strong>{rep["name"]}</strong> at <strong>{rep["phone"]}</strong>.')
 
 
 def make_call(app, given_name, family_name, postal_code, rep):

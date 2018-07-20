@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-wtf = "*"
-pyactionnetwork = "*"
 phonenumbers = "*"
 gunicorn = "*"
+requests = "*"
 
 [dev-packages]
 

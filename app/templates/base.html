@@ -18,7 +18,7 @@
     <meta property="twitter:description" content="TWITTER DESC. CAN INCL. IMAGE"/>
     <meta name="twittertext" content="TWITTER TEXT WITH HASHTAG"/>
 
-    <title>TITLE (again)</title>
+    <title>#HimToo</title>
     <link href="{{ url_for('static', filename='css/baseline.css') }}" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -39,15 +39,6 @@
             of Congress listen to the recording.</p>
 
     </div>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="messages">
-            {% for message in messages %}
-                <li class="message">{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
 </div>
 
 <div class="steps" id="steps">

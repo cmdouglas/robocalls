@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from flask import render_template, request, session, redirect, url_for
 
 from app import app
@@ -6,6 +8,11 @@ from app.person import persist_person
 from app.representatives import get_reps_by_postal_code
 from app.call import make_calls
 
+
+@app.before_request
+def session_timeout():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=20)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -34,15 +41,15 @@ def index():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    if request.method == 'POST':
-        family_name = session.pop('family_name', None)
-        given_name = session.pop('given_name', None)
-        postal_code = session.pop('postal_code', None)
+    family_name = session.pop('family_name', None)
+    given_name = session.pop('given_name', None)
+    postal_code = session.pop('postal_code', None)
 
-        if given_name and family_name and postal_code:
+    if not (given_name and family_name and postal_code):
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
             reps = get_reps_by_postal_code(postal_code)
             make_calls(app, given_name, family_name, postal_code, reps)
-        else:
-            return redirect(url_for('index'))
 
     return render_template('confirmation.html')
