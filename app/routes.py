@@ -4,9 +4,9 @@ from flask import render_template, request, session, redirect, url_for
 
 from app import app
 from app.forms import MakeCallForm
-from app.person import persist_person
+from app.people import create_person
 from app.representatives import get_reps_by_postal_code
-from app.call import make_calls
+from app.calls import make_calls
 
 
 @app.before_request
@@ -19,8 +19,7 @@ def session_timeout():
 def index():
     form = MakeCallForm()
     if request.method == 'POST' and form.validate_on_submit():
-        persist_person(
-            app,
+        create_person(
             form.email.data,
             form.given_name.data,
             form.family_name.data,
@@ -32,7 +31,7 @@ def index():
         session['postal_code'] = form.postal_code.data
 
         reps = get_reps_by_postal_code(form.postal_code.data)
-        make_calls(app, form.given_name.data, form.family_name.data, form.postal_code.data, reps)
+        make_calls(form.given_name.data, form.family_name.data, form.postal_code.data, reps)
 
         return redirect(url_for('confirmation'))
 

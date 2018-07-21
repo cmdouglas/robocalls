@@ -3,6 +3,8 @@ import requests
 import json
 from flask import flash
 
+from app import app
+
 
 def format_phone(phone):
     return phonenumbers.format_number(
@@ -10,17 +12,17 @@ def format_phone(phone):
     )
 
 
-def make_calls(app, given_name, family_name, postal_code, reps):
+def make_calls(given_name, family_name, postal_code, reps):
     # only make one call if the recipient is overridden
     if app.config.get('PHONE_RECIPIENT_OVERRIDE'):
         reps = reps[:1]
 
     for rep in reps:
-        make_call(app, given_name, family_name, postal_code, rep)
+        make_call(given_name, family_name, postal_code, rep)
         flash(f'Call placed to <strong>{rep["name"]}</strong> at <strong>{rep["phone"]}</strong>.')
 
 
-def make_call(app, given_name, family_name, postal_code, rep):
+def make_call(given_name, family_name, postal_code, rep):
     account_sid = app.config.get('TWILIO_ACCOUNT_SID')
     auth_token = app.config.get('TWILIO_SECRET')
 
