@@ -1,9 +1,9 @@
 import phonenumbers
-import requests
 import json
 from flask import flash
 
 from app import app
+from app.client import client
 
 
 def format_phone(phone):
@@ -46,7 +46,7 @@ def make_call(given_name, family_name, postal_code, rep):
         'zip': postal_code
     }
 
-    response = requests.post(
+    response = client().post(
         f'https://studio.twilio.com/v1/Flows/{flow_sid}/Engagements',
         {
             'To': call_to,

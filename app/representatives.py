@@ -1,6 +1,7 @@
 import json
-import requests
 from werkzeug.contrib.cache import FileSystemCache
+
+from app.client import client
 
 
 def get_reps_by_postal_code(postal_code):
@@ -9,7 +10,7 @@ def get_reps_by_postal_code(postal_code):
         return cache.get(postal_code)
 
     url = f'http://whoismyrepresentative.com/getall_mems.php?zip={postal_code}&output=json'
-    response = requests.get(url)
+    response = client().get(url)
     content = response.content.decode(response.apparent_encoding)
     try:
         content = json.loads(content)
