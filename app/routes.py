@@ -4,7 +4,7 @@ from flask import render_template, request, session, redirect, url_for
 
 from app import app
 from app.forms import MakeCallForm
-from app.people import create_person
+from app.people import persist_person
 from app.representatives import get_reps_by_postal_code
 from app.calls import make_calls
 
@@ -14,12 +14,13 @@ def session_timeout():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=20)
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = MakeCallForm()
     if request.method == 'POST' and form.validate_on_submit():
-        create_person(
+        persist_person(
             form.email.data,
             form.given_name.data,
             form.family_name.data,
@@ -48,7 +49,7 @@ def confirmation():
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-            reps = get_reps_by_postal_code(postal_code)
-            make_calls(app, given_name, family_name, postal_code, reps)
+        reps = get_reps_by_postal_code(postal_code)
+        make_calls(given_name, family_name, postal_code, reps)
 
     return render_template('confirmation.html')
