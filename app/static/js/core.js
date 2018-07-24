@@ -1,4 +1,8 @@
 $(function() {
+    $("#mainTitle").fitText(.8);
+});
+
+$(function() {
 /*
 	$("#firstCall").click(function() {
         $('#callContent').css('display', 'none');
