@@ -88,7 +88,7 @@ Neither are in google fonts or typekit --> alts would be very welcome.
 
     .topContent {
         padding:3%;
-        font-weight:bold;
+        font-weight:700;
     }
 
     .top {
@@ -139,7 +139,7 @@ Neither are in google fonts or typekit --> alts would be very welcome.
     }
 
     .faqQuestion {
-        font-weight:bold;
+        font-weight:800;
         margin-top:15px;
     }
 
@@ -254,7 +254,7 @@ Neither are in google fonts or typekit --> alts would be very welcome.
         }
 
         h1 {
-            font-size:7em;
+            font-size:5em;
         }
 
         h2 {
@@ -272,11 +272,15 @@ Neither are in google fonts or typekit --> alts would be very welcome.
     /* MAIN */
 
         .content {
-            max-width:65%;
+            max-width:80%;
+        }
+
+        .topContent {
+            padding-top:100px;
         }
 
         .input {
-            width: 60%;
+            width: 95%;
         }
 
         span.error {
@@ -310,3 +314,15 @@ Neither are in google fonts or typekit --> alts would be very welcome.
         }
 
 }
+
+@media screen and (min-width: 1000px) {
+
+        .content {
+            max-width:45%;
+        }
+
+        .input {
+            width: 95%;
+        }
+
+}    
