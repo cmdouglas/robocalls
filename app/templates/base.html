@@ -13,17 +13,19 @@
     <meta property="og:image" content="images/Facebook Image.png"/>
     <meta property="og:site_name" content="Make Them Listen"/>
     <meta property="fb:admins" content="612663871"/>
-    <meta property="og:description" content="Play tapes of Trump’s high crimes for your members of Congress to demand they remove the Trump Administration."/>
+    <meta property="og:description"
+          content="Play tapes of Trump’s high crimes for your members of Congress to demand they remove the Trump Administration."/>
     <meta property="twitter:title" content="Frustrated with Congress refusing to remove Trump? Maybe this will help."/>
     <meta property="twitter:description" content=" Play tapes of Trump’s high crimes for your Member of Congress."/>
-    <meta name="twittertext" content="If you’re frustrated with Congress refusing to remove Trump - maybe this will help. Play tapes of Trump’s high crimes for your Member of Congress."/>
+    <meta name="twittertext"
+          content="If you’re frustrated with Congress refusing to remove Trump - maybe this will help. Play tapes of Trump’s high crimes for your Member of Congress."/>
 
     <title>#MakeThemListen</title>
     <link href="{{ url_for('static', filename='css/baseline.css') }}" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename="js/core.js") }}" rel="stylesheet"></script>
-    <script src="js/jquery.fittext.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fittext.js') }}"></script>
 
 </head>
 <body>
@@ -92,6 +94,6 @@
     <div class="footer">
         <img class="footerLogo" src="{{ url_for('static', filename='images/logo.svg') }}">
     </div>
-
+</div>
 </body>
 </html>
