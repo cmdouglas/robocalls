@@ -41,9 +41,9 @@ def index():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    family_name = session.pop('family_name', None)
-    given_name = session.pop('given_name', None)
-    postal_code = session.pop('postal_code', None)
+    family_name = session.get('family_name', None)
+    given_name = session.get('given_name', None)
+    postal_code = session.get('postal_code', None)
 
     if not (given_name and family_name and postal_code):
         return redirect(url_for('index'))

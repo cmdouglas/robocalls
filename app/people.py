@@ -36,6 +36,6 @@ def create_person(email, given_name='', family_name='', postal_code=''):
             }],
             'custom_fields': [],
         },
-        'add_tags': []
+        'add_tags': ['dialer']
     }
     return client().post(url, json=person, headers=headers).raise_for_status()

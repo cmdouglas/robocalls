@@ -9,6 +9,7 @@ flask-wtf = "*"
 phonenumbers = "*"
 gunicorn = "*"
 requests = "*"
+redis = "*"
 
 [dev-packages]
 
