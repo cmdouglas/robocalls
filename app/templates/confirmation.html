@@ -5,15 +5,17 @@
 
         <h2>Great!</h2>
 
-        <p>We're calling all your Members of Congress on your behalf right now.</p>
-
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="message">{{ message|safe }}</p>
-                    {% endfor %}
+        <p>
+            We're calling
+            {% for rep in reps %}
+                {% if loop.last and loop.length > 1 %}
+                    and {{ rep.name }}
+                {% else %}
+                    {{ rep.name }}{% if loop.length > 1 %},{% endif %}
                 {% endif %}
-            {% endwith %}
+            {% endfor %}
+            on your behalf right now.
+        </p>
 
         <p style="font-weight: 800;">Can you share this with your friends so they can auto-dial Congress, too?</p>
 

@@ -4,10 +4,8 @@ from flask import render_template, request, session, redirect, url_for
 
 from app import app
 from app.forms import MakeCallForm
-from app.people import persist_person
 from app.representatives import get_reps_by_postal_code
-from app.calls import make_calls
-
+from app.jobs import enqueue_job, make_calls_job, save_person_and_make_calls_job
 
 @app.before_request
 def session_timeout():
@@ -20,19 +18,21 @@ def session_timeout():
 def index():
     form = MakeCallForm()
     if request.method == 'POST' and form.validate_on_submit():
-        persist_person(
-            form.email.data,
-            form.given_name.data,
-            form.family_name.data,
-            form.postal_code.data
-        )
+        reps = get_reps_by_postal_code(form.postal_code.data)
 
+        session['reps'] = reps
         session['given_name'] = form.given_name.data
         session['family_name'] = form.family_name.data
         session['postal_code'] = form.postal_code.data
 
-        reps = get_reps_by_postal_code(form.postal_code.data)
-        make_calls(form.given_name.data, form.family_name.data, form.postal_code.data, reps)
+        enqueue_job(
+            save_person_and_make_calls_job,
+            form.email.data,
+            form.given_name.data,
+            form.family_name.data,
+            form.postal_code.data,
+            reps
+        )
 
         return redirect(url_for('confirmation'))
 
@@ -41,15 +41,22 @@ def index():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    family_name = session.get('family_name', None)
-    given_name = session.get('given_name', None)
-    postal_code = session.get('postal_code', None)
+    reps = session.pop('reps')
 
-    if not (given_name and family_name and postal_code):
+    given_name = session.get('given_name')
+    family_name = session.get('family_name')
+    postal_code = session.get('postal_code')
+
+    if not reps:
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-        reps = get_reps_by_postal_code(postal_code)
-        make_calls(given_name, family_name, postal_code, reps)
+        enqueue_job(
+            make_calls_job,
+            given_name,
+            family_name,
+            postal_code,
+            reps
+        )
 
-    return render_template('confirmation.html')
+    return render_template('confirmation.html', reps=reps)

@@ -10,6 +10,7 @@ phonenumbers = "*"
 gunicorn = "*"
 requests = "*"
 redis = "*"
+rq = "*"
 
 [dev-packages]
 
