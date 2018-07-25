@@ -12,6 +12,6 @@ class MakeCallForm(FlaskForm):
         'Postal Code',
         validators=[
             DataRequired(),
-            Regexp('[0-9]{5}', message="Invalid Zip code.")
+            Regexp('[0-9]{5}', message="Invalid zip code.")
         ]
     )
