@@ -49,7 +49,7 @@ def index():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    reps = session.pop('reps', None)
+    reps = session.get('reps', None)
 
     given_name = session.get('given_name', None)
     family_name = session.get('family_name', None)
