@@ -42,7 +42,7 @@ def index():
             reps
         )
 
-        return redirect(url_for('confirmation'))
+        return redirect(url_for('confirmation', _anchor="share"))
 
     return render_template('index.html', form=form)
 
