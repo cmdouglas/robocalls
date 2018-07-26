@@ -14,7 +14,7 @@ def enqueue_job(f, *args):
     app.logger.info(f'job added: {job}')
 
 
-def persist_person_job(email, given_name, family_name, postal_code, reps):
+def persist_person_job(email, given_name, family_name, postal_code):
     persist_person(email, given_name, family_name, postal_code)
 
 
