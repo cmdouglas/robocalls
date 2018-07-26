@@ -1,4 +1,3 @@
-import logging
 from app import app
 from app.client import client
 
@@ -8,14 +7,14 @@ headers = {"OSDI-API-Token": app.config.get('ACTION_NETWORK_KEY')}
 
 def persist_person(email, given_name='', family_name='', postal_code=''):
     if get_person_by_email(email):
-        logging.info(f"Person: {email} already exists.")
+        app.logger.info(f"Person: {email} already exists.")
         return
 
     create_person(email, given_name, family_name, postal_code)
 
 
 def get_person_by_email(email):
-    logging.info(f"Looking up: {email} already exists.")
+    app.logger.info(f"Looking up: {email}")
 
     response = client().get(f"{url}?filter=email eq '{email}'", headers=headers)
     response.raise_for_status()
@@ -24,7 +23,7 @@ def get_person_by_email(email):
 
 
 def create_person(email, given_name='', family_name='', postal_code=''):
-    logging.info(f"Creating person: {email} {given_name} {family_name} {postal_code}")
+    app.logger.info(f"Creating person: {email} {given_name} {family_name} {postal_code}")
     person = {
         'person': {
             'family_name': family_name,
@@ -44,5 +43,5 @@ def create_person(email, given_name='', family_name='', postal_code=''):
         'add_tags': ['dialer']
     }
     response = client().post(url, json=person, headers=headers)
-    logging.info(f"Successfully created person: {email} {given_name} {family_name} {postal_code}")
     response.raise_for_status()
+    app.logger.info(f"Successfully created person: {email} {given_name} {family_name} {postal_code}")

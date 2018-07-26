@@ -1,4 +1,3 @@
-import logging
 import json
 import phonenumbers
 
@@ -45,7 +44,7 @@ def make_call(given_name, family_name, postal_code, rep):
         'zip': postal_code
     }
 
-    logging.info(f"Placing call from {call_from} to {call_to}", parameters)
+    app.logger.info(f"Placing call from {call_from} to {call_to}", parameters)
     response = client().post(
         f'https://studio.twilio.com/v1/Flows/{flow_sid}/Engagements',
         {
@@ -57,4 +56,4 @@ def make_call(given_name, family_name, postal_code, rep):
     )
 
     response.raise_for_status()
-    logging.info("Successfully placed call")
+    app.logger.info("Successfully placed call")

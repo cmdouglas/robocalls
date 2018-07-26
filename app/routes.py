@@ -5,7 +5,8 @@ from flask import render_template, request, session, redirect, url_for
 from app import app
 from app.forms import MakeCallForm
 from app.representatives import get_reps_by_postal_code
-from app.jobs import enqueue_job, make_calls_job, save_person_and_make_calls_job
+from app.jobs import enqueue_job, make_calls_job, persist_person_job
+
 
 @app.before_request
 def session_timeout():
@@ -26,8 +27,15 @@ def index():
         session['postal_code'] = form.postal_code.data
 
         enqueue_job(
-            save_person_and_make_calls_job,
+            persist_person_job,
             form.email.data,
+            form.given_name.data,
+            form.family_name.data,
+            form.postal_code.data,
+        )
+
+        enqueue_job(
+            make_calls_job,
             form.given_name.data,
             form.family_name.data,
             form.postal_code.data,
@@ -41,11 +49,11 @@ def index():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    reps = session.pop('reps')
+    reps = session.pop('reps', None)
 
-    given_name = session.get('given_name')
-    family_name = session.get('family_name')
-    postal_code = session.get('postal_code')
+    given_name = session.get('given_name', None)
+    family_name = session.get('family_name', None)
+    postal_code = session.get('postal_code', None)
 
     if not reps:
         return redirect(url_for('index'))
