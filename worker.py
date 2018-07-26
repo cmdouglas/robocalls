@@ -1,13 +1,11 @@
 from rq import Worker, Queue, Connection
-from rq.handlers import move_to_failed_queue
-from app import app
-from app.jobs import conn
+from app import redis_connection
 
 listen = ['default']
 
 
 
 if __name__ == '__main__':
-    with Connection(conn):
+    with Connection(redis_connection):
         worker = Worker(map(Queue, listen))
         worker.work()

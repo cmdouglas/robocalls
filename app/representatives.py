@@ -2,15 +2,13 @@ import json
 
 from werkzeug.contrib.cache import RedisCache
 
-from app import app
+from app import redis_connection
 from app.client import client
 
 
 def get_reps_by_postal_code(postal_code):
     cache = RedisCache(
-        host=app.config.get('REDIS_HOST'),
-        port=app.config.get('REDIS_PORT'),
-        password=app.config.get('REDIS_PASSWORD'),
+        redis_connection,
         default_timeout=(60 * 60 * 24 * 7)  # one week
     )
 

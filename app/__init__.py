@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 
+import redis
 from flask import Flask
 from config import Config
 
@@ -35,5 +36,6 @@ def create_app(config_class=Config):
 
 
 app = create_app(Config)
+redis_connection = redis.from_url(app.config.get('RQ_REDIS_URL'))
 
 from app import routes

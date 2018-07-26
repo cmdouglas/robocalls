@@ -5,7 +5,7 @@ from flask import render_template, request, session, redirect, url_for
 from app import app
 from app.forms import MakeCallForm
 from app.representatives import get_reps_by_postal_code
-from app.jobs import enqueue_job, make_calls_job, persist_person_job
+from app.jobs import make_calls_job, persist_person_job
 
 
 @app.before_request
@@ -26,16 +26,14 @@ def index():
         session['family_name'] = form.family_name.data
         session['postal_code'] = form.postal_code.data
 
-        enqueue_job(
-            persist_person_job,
+        persist_person_job.delay(
             form.email.data,
             form.given_name.data,
             form.family_name.data,
             form.postal_code.data,
         )
 
-        enqueue_job(
-            make_calls_job,
+        make_calls_job.delay(
             form.given_name.data,
             form.family_name.data,
             form.postal_code.data,
@@ -59,8 +57,7 @@ def confirmation():
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-        enqueue_job(
-            make_calls_job,
+        make_calls_job.delay(
             given_name,
             family_name,
             postal_code,

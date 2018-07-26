@@ -19,8 +19,4 @@ class Config:
     REQUESTS_VERIFY = os.environ.get('REQUESTS_VERIFY')
 
     RQ_REDIS_URL = os.environ.get('REDISCLOUD_URL')
-    REDIS_HOST = redis_url.hostname
-    REDIS_PORT = redis_url.port
-    REDIS_USERNAME = redis_url.username
-    REDIS_PASSWORD = redis_url.password
 
