@@ -19,4 +19,7 @@ class Config:
     REQUESTS_VERIFY = os.environ.get('REQUESTS_VERIFY')
 
     RQ_REDIS_URL = os.environ.get('REDISCLOUD_URL')
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+
 

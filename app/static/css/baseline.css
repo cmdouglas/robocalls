@@ -112,6 +112,10 @@ Neither are in google fonts or typekit --> alts would be very welcome.
         box-sizing: border-box;
     }
 
+    div.g-recaptcha {
+        display: inline-block;
+    }
+
     /**
     #shareContent {
         opacity:0;

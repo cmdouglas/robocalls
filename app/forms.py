@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField
 
 from wtforms.validators import Email, DataRequired, Regexp
@@ -15,3 +15,5 @@ class MakeCallForm(FlaskForm):
             Regexp('[0-9]{5}', message="Invalid zip code.")
         ]
     )
+    recaptcha = RecaptchaField()
+
