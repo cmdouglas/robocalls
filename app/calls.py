@@ -11,16 +11,16 @@ def format_phone(phone):
     )
 
 
-def make_calls(given_name, family_name, postal_code, reps):
+def make_calls(person, reps):
     # only make one call if the recipient is overridden
     if app.config.get('PHONE_RECIPIENT_OVERRIDE'):
         reps = reps[:1]
 
     for rep in reps:
-        make_call(given_name, family_name, postal_code, rep)
+        make_call(person, rep)
 
 
-def make_call(given_name, family_name, postal_code, rep):
+def make_call(person, rep):
     account_sid = app.config.get('TWILIO_ACCOUNT_SID')
     auth_token = app.config.get('TWILIO_SECRET')
 
@@ -39,9 +39,9 @@ def make_call(given_name, family_name, postal_code, rep):
 
     parameters = {
         'contact_name': contact_name,
-        'first_name': given_name,
-        'last_name': family_name,
-        'zip': postal_code
+        'first_name': person.given_name,
+        'last_name': person.family_name,
+        'zip': person.postal_code
     }
 
     app.logger.info(f"Placing call from {call_from} to {call_to}", parameters)

@@ -6,10 +6,10 @@ from app.calls import make_calls
 
 
 @job('default', connection=redis_connection)
-def persist_person_job(email, given_name, family_name, postal_code):
-    persist_person(email, given_name, family_name, postal_code)
+def persist_person_job(person):
+    persist_person(person)
 
 
 @job('default', connection=redis_connection)
-def make_calls_job(given_name, family_name, postal_code, reps):
-    make_calls(given_name, family_name, postal_code, reps)
+def make_calls_job(person, reps):
+    make_calls(person, reps)

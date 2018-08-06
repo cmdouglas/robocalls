@@ -1,8 +1,10 @@
 from datetime import timedelta
 
 from flask import render_template, request, session, redirect, url_for
+from dataclasses import asdict
 
 from app import app
+from app.models.person import Person
 from app.forms import MakeCallForm
 from app.representatives import get_reps_by_postal_code
 from app.jobs import make_calls_job, persist_person_job
@@ -19,24 +21,18 @@ def session_timeout():
 def index():
     form = MakeCallForm()
     if request.method == 'POST' and form.validate_on_submit():
+        person = Person()
+        form.populate_obj(person)
         reps = get_reps_by_postal_code(form.postal_code.data)
 
         session['reps'] = reps
-        session['given_name'] = form.given_name.data
-        session['family_name'] = form.family_name.data
-        session['postal_code'] = form.postal_code.data
-
+        session['person'] = asdict(person)
         persist_person_job.delay(
-            form.email.data,
-            form.given_name.data,
-            form.family_name.data,
-            form.postal_code.data,
+            person
         )
 
         make_calls_job.delay(
-            form.given_name.data,
-            form.family_name.data,
-            form.postal_code.data,
+            person,
             reps
         )
 
@@ -48,19 +44,14 @@ def index():
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
     reps = session.get('reps', None)
-
-    given_name = session.get('given_name', None)
-    family_name = session.get('family_name', None)
-    postal_code = session.get('postal_code', None)
+    person_dict = session.get('person', None)
 
     if not reps:
         return redirect(url_for('index'))
 
     if request.method == 'POST':
         make_calls_job.delay(
-            given_name,
-            family_name,
-            postal_code,
+            Person(**person_dict),
             reps
         )
 

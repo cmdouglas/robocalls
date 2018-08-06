@@ -5,12 +5,12 @@ url = "https://actionnetwork.org/api/v2/people/"
 headers = {"OSDI-API-Token": app.config.get('ACTION_NETWORK_KEY')}
 
 
-def persist_person(email, given_name='', family_name='', postal_code=''):
-    if get_person_by_email(email):
-        app.logger.info(f"Person: {email} already exists.")
+def persist_person(person):
+    if get_person_by_email(person.email):
+        app.logger.info(f"Person: {person.email} already exists.")
         return
 
-    create_person(email, given_name, family_name, postal_code)
+    create_person(person)
 
 
 def get_person_by_email(email):
@@ -22,26 +22,28 @@ def get_person_by_email(email):
     return search_result.get('_embedded', {}).get('osdi:people')
 
 
-def create_person(email, given_name='', family_name='', postal_code=''):
-    app.logger.info(f"Creating person: {email} {given_name} {family_name} {postal_code}")
-    person = {
+def create_person(person):
+    app.logger.info(f"Creating person: {person.email} {person.given_name} {person.family_name} {person.postal_code}")
+    json = {
         'person': {
-            'family_name': family_name,
-            'given_name': given_name,
+            'family_name': person.family_name,
+            'given_name': person.given_name,
             'postal_addresses': [{
                 'address_lines': [],
                 'locality': '',
                 'region': '',
                 'country': 'US',
-                'postal_code': postal_code
+                'postal_code': person.postal_code
             }],
             'email_addresses': [{
-                'address': email
+                'address': person.email
             }],
             'custom_fields': [],
         },
         'add_tags': ['dialer']
     }
-    response = client().post(url, json=person, headers=headers)
+    response = client().post(url, json=json, headers=headers)
     response.raise_for_status()
-    app.logger.info(f"Successfully created person: {email} {given_name} {family_name} {postal_code}")
+    app.logger.info(
+        f"Successfully created person: {person.email} {person.given_name} {person.family_name} {person.postal_code}"
+    )
