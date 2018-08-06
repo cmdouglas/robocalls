@@ -5,9 +5,9 @@ from app import app
 from app.client import client
 
 
-def format_phone(phone):
+def format_phone(phone, format=phonenumbers.PhoneNumberFormat.E164):
     return phonenumbers.format_number(
-        phonenumbers.parse(phone, 'US'), phonenumbers.PhoneNumberFormat.E164
+        phonenumbers.parse(phone, 'US'), format
     )
 
 
@@ -41,6 +41,7 @@ def make_call(person, rep):
         'contact_name': contact_name,
         'first_name': person.given_name,
         'last_name': person.family_name,
+        'callback_number': format_phone(person.phone_number, phonenumbers.PhoneNumberFormat.NATIONAL),
         'zip': person.postal_code
     }
 

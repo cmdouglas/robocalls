@@ -26,6 +26,11 @@
             <span class="error">{{ error }}</span>
         {% endfor %}
 
+        {{ form.phone_number(class='input', placeholder="Phone Number") }}
+        {% for error in form.phone_number.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+
         {{ form.recaptcha }}
 
     </div>
