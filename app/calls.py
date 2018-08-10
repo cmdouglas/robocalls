@@ -42,7 +42,7 @@ def make_call(person, rep):
         'first_name': person.given_name,
         'last_name': person.family_name,
         'callback_number': format_phone(person.phone_number, phonenumbers.PhoneNumberFormat.NATIONAL),
-        'zip': ' '.join(c for c in person.postal_code) 
+        'zip': ' '.join(c for c in person.postal_code)
     }
 
     app.logger.info(f"Placing call from {call_from} to {call_to}", parameters)
