@@ -1,9 +1,7 @@
 <form action="{{ url_for('index') }}" method="post">
     {{ form.hidden_tag() }}
 
-    <h2>Step 1</h2>
-
-    <p>Enter your information so we can direct the recording to the correct Members of Congress.</p>
+    <h2>Step 1: Enter your information:</h2>
 
     <div class="formFields">
         {{ form.given_name(class='input', placeholder='First Name') }}
@@ -35,10 +33,10 @@
 
     </div>
 
-    <h2>Step 2</h2>
+    <h2>Step 2: Press this button.</h2>
 
-    <p>Press this button. When you do, a machine will call a Member of Congress and play the recording of Donald
-        Trump confessing to sexual assault.</p>
+    <p>When you do, a machine will call your Members of Congress and play the recording of Donald
+        Trump defending Nazis shortly after they murdered a peaceful protestor.</p>
 
     <button class="callButton" id="firstCall">Auto-Dial Congress</button>
 </form>
