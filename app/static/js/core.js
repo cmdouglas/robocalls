@@ -1,5 +1,5 @@
 $(function() {
-    $("#mainTitle").fitText(.8);
+    $("#mainTitle").fitText(.7);
 });
 
 $(function() {
