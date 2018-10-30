@@ -46,7 +46,7 @@ def confirmation():
     reps = session.get('reps', None)
     person_dict = session.get('person', None)
 
-    if not reps:
+    if not person_dict:
         return redirect(url_for('index'))
 
     if request.method == 'POST':
