@@ -117,11 +117,11 @@
         },
         "phonenumbers": {
             "hashes": [
-                "sha256:d08b237c49b8aa11e884293181b89bc75d3957dbc492a89293b40a43403473c7",
-                "sha256:d9cf2e8e4ad40552487ab47182bc9759fca1edaa7d513e95a9f20c6742416234"
+                "sha256:dabc8cfcff96446b0787ea337739ea286ec3949ec27a4790a9b4587817da5c5f",
+                "sha256:efac24159582581d8ac467b5fc23fea298b1c101e6947f37c2ab666ec18f6cde"
             ],
             "index": "pypi",
-            "version": "==8.10.9"
+            "version": "==8.10.10"
         },
         "redis": {
             "hashes": [
@@ -149,10 +149,10 @@
         },
         "urllib3": {
             "hashes": [
-                "sha256:61bf29cada3fc2fbefad4fdf059ea4bd1b4a86d2b6d15e1c7c0b582b9752fe39",
-                "sha256:de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663385c6a9c22"
+                "sha256:4c291ca23bbb55c76518905869ef34bdd5f0e46af7afe6861e8375643ffee1a0",
+                "sha256:9a247273df709c4fedb38c711e44292304f73f39ab01beda9f6b9fc375669ac3"
             ],
-            "version": "==1.24.1"
+            "version": "==1.24.2"
         },
         "werkzeug": {
             "hashes": [
