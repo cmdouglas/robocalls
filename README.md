@@ -1,5 +1,5 @@
 # robocalls
-A flask app to auto-dial congress
+A flask app to auto-dial congress.  It will present a webpage with a form requiring a name, an email address, and a zipcode.  When the form is submitted, it will save the name and email to an Action Network account, look up any congressional representatives by zip code, dial their contact numbers using Twilio and play a predefined twilio flow for them.
 
 This is built to be deployed on Heroku, but could probably be modified to fit any cloud platform.  It requires Redis, an ActionNetwork account, a ReCaptcha account and a Twilio account with a flow defined for the call.  It expects to find these environment variables at a minimum:
 
